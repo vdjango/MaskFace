@@ -1,0 +1,26 @@
+<annotation>
+	<folder>JPEGImages</folder>
+	<filename>face222.jpg</filename>
+	<path>/home/huzixuan/桌面/JPEGImages/face222.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>307</width>
+		<height>449</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>unmask</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>88</xmin>
+			<ymin>67</ymin>
+			<xmax>221</xmax>
+			<ymax>267</ymax>
+		</bndbox>
+	</object>
+</annotation>

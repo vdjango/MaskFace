@@ -1,0 +1,26 @@
+<annotation>
+	<folder>JPEGImages</folder>
+	<filename>masks_0077.jpg</filename>
+	<path>/home/huzixuan/桌面/JPEGImages/masks_0077.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>448</width>
+		<height>597</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>mask</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>162</xmin>
+			<ymin>137</ymin>
+			<xmax>355</xmax>
+			<ymax>354</ymax>
+		</bndbox>
+	</object>
+</annotation>

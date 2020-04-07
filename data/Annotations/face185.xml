@@ -1,0 +1,26 @@
+<annotation>
+	<folder>JPEGImages</folder>
+	<filename>face185.jpg</filename>
+	<path>/home/huzixuan/桌面/JPEGImages/face185.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>114</width>
+		<height>160</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>unmask</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>33</xmin>
+			<ymin>30</ymin>
+			<xmax>83</xmax>
+			<ymax>90</ymax>
+		</bndbox>
+	</object>
+</annotation>

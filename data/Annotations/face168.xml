@@ -1,0 +1,26 @@
+<annotation>
+	<folder>JPEGImages</folder>
+	<filename>face168.jpg</filename>
+	<path>/home/huzixuan/桌面/JPEGImages/face168.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>953</width>
+		<height>1325</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>unmask</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>289</xmin>
+			<ymin>306</ymin>
+			<xmax>675</xmax>
+			<ymax>785</ymax>
+		</bndbox>
+	</object>
+</annotation>
