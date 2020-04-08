@@ -56,8 +56,11 @@ PPython 3.7或更高版本，pip install -U -r requirements.txt包括以下所�
 ## 速度
 
 **GPU：** Nvidia RTX 2080 12G
+
 **数据集：** (135张图像)
+
 **型号：** yolov3-tiny.cfg
+
 **命令：** python3.6 train.py --data data/mask_face.data --weights weights/yolov3-tiny.weights --cfg cfg/yolov3-tiny.cfg --epochs 100
 
 GPU |n| `--batch --accum` | img/s | epoch<br>time | epoch<br>cost
