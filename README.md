@@ -1,13 +1,13 @@
 <table style="width:100%">
   <tr>
     <td>
-      <img src="output/masks_00110.jpg">
+      <img src="output/masks_00117.jpg">
     </td>
     <td align="center">
-        <img src="output/face7.jpg">
+        <img src="output/masks_00154.jpg">
     </td>
     <td>
-      <img src="output/masks_00117.jpg">
+      <img src="output/face7.jpg">
     </td>
   </tr>
 </table>
