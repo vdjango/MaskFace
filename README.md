@@ -1,4 +1,3 @@
-> 助理于新型冠状病毒疫情防控
 
 <table style="width:100%">
   <tr>
@@ -16,6 +15,8 @@
 
 
 # 人脸口罩检测与识别
+
+> 助力于新型冠状病毒疫情防控
 
 该目录包含由Ultralytics LLC开发的PyTorch YOLOv3软件，并根据GPL-3.0许可可免费重新分发。有关更多信息，请访问 https://www.ultralytics.com
 
