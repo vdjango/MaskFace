@@ -39,7 +39,7 @@ PPython 3.7或更高版本，pip install -U -r requirements.txt包括以下所�
 
 # 训练
 
-**开始训练:** `data/get_coco2017.sh` 下载COCO数据后开始培训 `python3.6 train.py`
+**开始训练:** `data/get_coco2017.sh` 请下载百度云网盘数据后开始训练 `python3.6 train.py`
 
 **恢复训练:** `python3 train.py --resume` 恢复训练 `weights/last.pt`.
 
@@ -58,7 +58,7 @@ PPython 3.7或更高版本，pip install -U -r requirements.txt包括以下所�
 **GPU：** Nvidia RTX 2080 12G
 **数据集：** (135张图像)
 **型号：** yolov3-tiny.cfg
-**命令：** python3.6 train.py --data data/rbc.data --weights weights/yolov3-tiny.weights --cfg cfg/yolov3-tiny.cfg --epochs 100
+**命令：** python3.6 train.py --data data/mask_face.data --weights weights/yolov3-tiny.weights --cfg cfg/yolov3-tiny.cfg --epochs 100
 
 GPU |n| `--batch --accum` | img/s | epoch<br>time | epoch<br>cost
 --- |--- |--- |--- |--- |---
@@ -67,7 +67,7 @@ GPU |n| `--batch --accum` | img/s | epoch<br>time | epoch<br>cost
 # 推理
 
 ```bash
-python3.6 detect.py --names data/rbc.names --cfg cfg/yolov3-tiny.cfg --weights weights/best.pt --source ...
+python3.6 detect.py --names data/mask_face.names --cfg cfg/yolov3-tiny.cfg --weights weights/best.pt --source ...
 ```
 
 - 图片： `--source file.jpg`
@@ -77,19 +77,27 @@ python3.6 detect.py --names data/rbc.names --cfg cfg/yolov3-tiny.cfg --weights w
 - RTSP流： `--source rtsp://170.93.143.139/rtplive/470011e600ef003a004ee33696235daa`
 - HTTP流： `--source http://wmccpinetop.axiscam.net/mjpg/video.mjpg`
 
+**YOLOv3:** `python3.6 detect.py --names data/mask_face.names --cfg cfg/yolov3.cfg --weights weights/best.pt`
 
-**YOLOv3:** `python3.6 detect.py --names data/rbc.names --cfg cfg/yolov3.cfg --weights weights/best.pt`
-<img src="https://user-images.githubusercontent.com/26833433/64067835-51d5b500-cc2f-11e9-982e-843f7f9a6ea2.jpg" width="500">
+**YOLOv3-tiny:** `python3.6 detect.py --names data/mask_face.names --cfg cfg/yolov3-tiny.cfg --weights weights/best.pt`  
 
-**YOLOv3-tiny:** `python3.6 detect.py --names data/rbc.names --cfg cfg/yolov3-tiny.cfg --weights weights/best.pt`  
-<img src="https://user-images.githubusercontent.com/26833433/64067834-51d5b500-cc2f-11e9-9357-c485b159a20b.jpg" width="500">
-
-**YOLOv3-SPP:** `python3.6 detect.py --names data/rbc.names --cfg cfg/yolov3-spp.cfg --weights weights/best.pt`  
-<img src="https://user-images.githubusercontent.com/26833433/64067833-51d5b500-cc2f-11e9-8208-6fe197809131.jpg" width="500">
+**YOLOv3-SPP:** `python3.6 detect.py --names data/mask_face.names --cfg cfg/yolov3-spp.cfg --weights weights/best.pt`  
 
 
 # 预训练模型
 
 从以下位置下载： [百度网盘 密码:idra](https://pan.baidu.com/s/1xJ58AD_CQgPqflnou19JiA)
 
+----
 
+<img src="output/face7.jpg" width="500">
+<img src="output/masks_0011.jpg" width="500">
+<img src="output/masks_0012.jpg" width="500">
+<img src="output/masks_00110.jpg" width="500">
+<img src="output/masks_00114.jpg" width="500">
+<img src="output/masks_00117.jpg" width="500">
+<img src="output/masks_00147.jpg" width="500">
+<img src="output/masks_00154.jpg" width="500">
+<img src="output/masks_00171.jpg" width="500">
+<img src="output/masks_00186.jpg" width="500">
+<img src="output/masks_00269.jpg" width="500">
