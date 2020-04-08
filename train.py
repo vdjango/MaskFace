@@ -1,5 +1,4 @@
 import argparse
-import time
 
 import torch.distributed as dist
 import torch.optim as optim
@@ -26,24 +25,26 @@ results_file = 'results.txt'
 
 # Hyperparameters https://github.com/ultralytics/yolov3/issues/310
 
-hyp = {'giou': 3.54,  # giou loss gain
-       'cls': 37.4,  # cls loss gain
-       'cls_pw': 1.0,  # cls BCELoss positive_weight
-       'obj': 64.3,  # obj loss gain (*=img_size/320 if img_size != 320)
-       'obj_pw': 1.0,  # obj BCELoss positive_weight
-       'iou_t': 0.225,  # iou training threshold
-       'lr0': 0.01,  # initial learning rate (SGD=5E-3, Adam=5E-4)
-       'lrf': 0.0005,  # final learning rate (with cos scheduler)
-       'momentum': 0.937,  # SGD momentum
-       'weight_decay': 0.000484,  # optimizer weight decay
-       'fl_gamma': 0.0,  # focal loss gamma (efficientDet default is gamma=1.5)
-       'hsv_h': 0.0138,  # image HSV-Hue augmentation (fraction)
-       'hsv_s': 0.678,  # image HSV-Saturation augmentation (fraction)
-       'hsv_v': 0.36,  # image HSV-Value augmentation (fraction)
-       'degrees': 1.98 * 0,  # image rotation (+/- deg)
-       'translate': 0.05 * 0,  # image translation (+/- fraction)
-       'scale': 0.05 * 0,  # image scale (+/- gain)
-       'shear': 0.641 * 0}  # image shear (+/- deg)
+hyp = {
+    'giou': 3.54,  # giou loss gain
+    'cls': 37.4,  # cls loss gain
+    'cls_pw': 1.0,  # cls BCELoss positive_weight
+    'obj': 64.3,  # obj loss gain (*=img_size/320 if img_size != 320)
+    'obj_pw': 1.0,  # obj BCELoss positive_weight
+    'iou_t': 0.225,  # iou training threshold
+    'lr0': 0.01,  # initial learning rate (SGD=5E-3, Adam=5E-4)
+    'lrf': 0.0005,  # final learning rate (with cos scheduler)
+    'momentum': 0.937,  # SGD momentum
+    'weight_decay': 0.000484,  # optimizer weight decay
+    'fl_gamma': 0.0,  # focal loss gamma (efficientDet default is gamma=1.5)
+    'hsv_h': 0.0138,  # image HSV-Hue augmentation (fraction)
+    'hsv_s': 0.678,  # image HSV-Saturation augmentation (fraction)
+    'hsv_v': 0.36,  # image HSV-Value augmentation (fraction)
+    'degrees': 1.98 * 0,  # image rotation (+/- deg)
+    'translate': 0.05 * 0,  # image translation (+/- fraction)
+    'scale': 0.05 * 0,  # image scale (+/- gain)
+    'shear': 0.641 * 0
+}  # image shear (+/- deg)
 
 # Overwrite hyp with hyp*.txt (optional)
 f = glob.glob('hyp*.txt')
@@ -87,7 +88,6 @@ def train():
 
     # Initialize model
     model = Darknet(cfg).to(device)
-    print('Darknet', model)
 
     # Optimizer
     pg0, pg1, pg2 = [], [], []  # optimizer parameter groups
@@ -106,7 +106,6 @@ def train():
     else:
         optimizer = optim.SGD(pg0, lr=hyp['lr0'], momentum=hyp['momentum'], nesterov=True)
 
-    print('optim', optimizer)
     optimizer.add_param_group({'params': pg1, 'weight_decay': hyp['weight_decay']})  # add pg1 with weight_decay
     optimizer.add_param_group({'params': pg2})  # add pg2 (biases)
     del pg0, pg1, pg2
@@ -164,34 +163,41 @@ def train():
         model.yolo_layers = model.module.yolo_layers  # move yolo layer indices to top level
 
     # Dataset
-    dataset = LoadImagesAndLabels(train_path, img_size, batch_size,
-                                  augment=True,
-                                  hyp=hyp,  # augmentation hyperparameters
-                                  rect=opt.rect,  # rectangular training
-                                  cache_images=opt.cache_images,
-                                  single_cls=opt.single_cls)
-    print('LoadImagesAndLabels')
+    dataset = LoadImagesAndLabels(
+        train_path, img_size, batch_size,
+        augment=True,
+        hyp=hyp,  # augmentation hyperparameters
+        rect=opt.rect,  # rectangular training
+        cache_images=opt.cache_images,
+        single_cls=opt.single_cls
+    )
 
     # Dataloader
     batch_size = min(batch_size, len(dataset))
     nw = min([os.cpu_count(), batch_size if batch_size > 1 else 0, 8])  # number of workers
-    dataloader = torch.utils.data.DataLoader(dataset,
-                                             batch_size=batch_size,
-                                             num_workers=nw,
-                                             shuffle=not opt.rect,  # Shuffle=True unless rectangular training is used
-                                             pin_memory=True,
-                                             collate_fn=dataset.collate_fn)
+    dataloader = torch.utils.data.DataLoader(
+        dataset,
+        batch_size=batch_size,
+        num_workers=nw,
+        shuffle=not opt.rect,  # Shuffle=True unless rectangular training is used
+        pin_memory=True,
+        collate_fn=dataset.collate_fn
+    )
 
     # Testloader
-    testloader = torch.utils.data.DataLoader(LoadImagesAndLabels(test_path, img_size_test, batch_size,
-                                                                 hyp=hyp,
-                                                                 rect=True,
-                                                                 cache_images=opt.cache_images,
-                                                                 single_cls=opt.single_cls),
-                                             batch_size=batch_size,
-                                             num_workers=nw,
-                                             pin_memory=True,
-                                             collate_fn=dataset.collate_fn)
+    testloader = torch.utils.data.DataLoader(
+        LoadImagesAndLabels(
+            test_path, img_size_test, batch_size,
+            hyp=hyp,
+            rect=True,
+            cache_images=opt.cache_images,
+            single_cls=opt.single_cls
+        ),
+        batch_size=batch_size,
+        num_workers=nw,
+        pin_memory=True,
+        collate_fn=dataset.collate_fn
+    )
 
     # Model parameters
     model.nc = nc  # attach number of classes to model
@@ -201,7 +207,6 @@ def train():
 
     # Model EMA
     ema = torch_utils.ModelEMA(model)
-    print('model')
 
     # Start training
     nb = len(dataloader)  # number of batches
@@ -229,7 +234,6 @@ def train():
             ni = i + nb * epoch  # number integrated batches (since train start)
             imgs = imgs.to(device).float() / 255.0  # uint8 to float32, 0 - 255 to 0.0 - 1.0
             targets = targets.to(device)
-            # print('model. targets')
 
             # Burn-in
             if ni <= n_burn:
@@ -251,10 +255,8 @@ def train():
                 if sf != 1:
                     ns = [math.ceil(x * sf / 32.) * 32 for x in imgs.shape[2:]]  # new shape (stretched to 32-multiple)
                     imgs = F.interpolate(imgs, size=ns, mode='bilinear', align_corners=False)
-            # print('model. Multi-Scale training')
             # Run model
             pred = model(imgs)
-            # print('model. Run model')
 
             # Compute loss
             loss, loss_items = compute_loss(pred, targets, model)
@@ -265,18 +267,12 @@ def train():
             # Scale loss by nominal batch_size of 64
             loss *= batch_size / 64
 
-            # print('model. Compute loss', mixed_precision)
-
             # Compute gradient
             if mixed_precision:
                 with amp.scale_loss(loss, optimizer) as scaled_loss:
                     scaled_loss.backward()
             else:
-                # print('model. loss backward')
                 loss.backward()
-                # print('model. loss backward')
-
-            # print('model. Compute gradient')
 
             # Optimize accumulated gradient
             if ni % accumulate == 0:
@@ -284,14 +280,11 @@ def train():
                 optimizer.zero_grad()
                 ema.update(model)
 
-            # print('model. Optimize accumulated gradient')
-
             # Print batch results
             mloss = (mloss * i + loss_items) / (i + 1)  # update mean losses
             mem = '%.3gG' % (torch.cuda.memory_cached() / 1E9 if torch.cuda.is_available() else 0)  # (GB)
             s = ('%10s' * 2 + '%10.3g' * 6) % ('%g/%g' % (epoch, epochs - 1), mem, *mloss, len(targets), img_size)
             pbar.set_description(s)
-            # print('model. Print batch results')
 
             # Plot images with bounding boxes
             if ni < 1:
@@ -300,13 +293,11 @@ def train():
                 if tb_writer:
                     tb_writer.add_image(f, cv2.imread(f)[:, :, ::-1], dataformats='HWC')
                     # tb_writer.add_graph(model, imgs)  # add model to tensorboard
-            # print('model. Plot images with bounding boxes')
 
             # end batch ------------------------------------------------------------------------------------------------
 
         # Update scheduler
         scheduler.step()
-        # print('Update scheduler')
 
         # Process epoch results
         ema.update_attr(model)
@@ -324,8 +315,6 @@ def train():
                 single_cls=opt.single_cls,
                 dataloader=testloader
             )
-
-        # print('Process epoch results')
 
         # Write epoch results
         with open(results_file, 'a') as f:
@@ -418,7 +407,6 @@ if __name__ == '__main__':
     parser.add_argument('--single-cls', action='store_true', help='train as single-class dataset')
     opt = parser.parse_args()
     opt.weights = last if opt.resume else opt.weights
-    print(opt)
     device = torch_utils.select_device(opt.device, apex=mixed_precision, batch_size=opt.batch_size)
     if device.type == 'cpu':
         mixed_precision = False
