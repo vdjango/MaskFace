@@ -1,18 +1,17 @@
 <table style="width:100%">
   <tr>
     <td>
-      <img src="output/face7.jpg">
+      <img src="output/masks_00110.jpg">
     </td>
     <td align="center">
-        <img src="output/face7.jpg" width="160">
         <img src="output/face7.jpg">
-        <img src="output/face7.jpg" width="180">
     </td>
     <td>
-      <img src="output/face7.jpg">
+      <img src="output/masks_00117.jpg">
     </td>
   </tr>
 </table>
+
 
 
 
