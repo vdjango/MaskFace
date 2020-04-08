@@ -52,7 +52,6 @@ PPython 3.7或更高版本，pip install -U -r requirements.txt包括以下所�
 
 `datasets.py` 将OpenCV驱动的（https://opencv.org/）增强应用于输入图像。我们使用镶嵌数据加载器（如下图所示）来增加训练过程中的图像可变性。
 
-<img src="https://user-images.githubusercontent.com/26833433/66699231-27beea80-ece5-11e9-9cad-bdf9d82c500a.jpg" width="900">
 
 ## 速度
 
@@ -89,7 +88,12 @@ python3.6 detect.py --names data/mask_face.names --cfg cfg/yolov3-tiny.cfg --wei
 
 从以下位置下载： [百度网盘 密码:idra](https://pan.baidu.com/s/1xJ58AD_CQgPqflnou19JiA)
 
+> 欢迎继续完善人脸口罩检测 数据集 mask_face
+> 通过 `data/scrat.py` 抓取百度图片，清洗数据后，labelImg标注数据集 
+> 已有数据集位于 `data/` 有135张图片
+
 ----
+### 检测效果
 
 <img src="output/face7.jpg" width="500">
 <img src="output/masks_0011.jpg" width="500">
