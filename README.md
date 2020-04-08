@@ -1,3 +1,5 @@
+> 助理于新型冠状病毒疫情防控
+
 <table style="width:100%">
   <tr>
     <td>
@@ -40,9 +42,11 @@ PPython 3.7或更高版本，pip install -U -r requirements.txt包括以下所�
 
 # 训练
 
-**开始训练:** 请自定义数据后开始训练，可以去抓取口罩相关图片 百度搜索戴口罩 `python3.6 train.py --data data/mask_face.data --weights weights/yolov3-tiny.weights --cfg cfg/yolov3-tiny.cfg --epochs 100`
+> 请自定义数据后开始训练，可以去抓取口罩相关图片 百度搜索戴口罩
 
-**恢复训练:** `python3 train.py --resume` 恢复训练 `weights/last.pt`.
+**开始训练:** `python3.6 train.py --data data/mask_face.data --weights weights/yolov3-tiny.weights --cfg cfg/yolov3-tiny.cfg --epochs 100`
+
+**恢复训练:** `python3 train.py --resume weights/last.pt`.
 
 **情节训练:** `from utils import utils; utils.plot_results()`
 
