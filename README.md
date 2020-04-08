@@ -20,7 +20,7 @@
 
 # 描述
 
-该 https://github.com/ultralytics/yolov3 代码包含PyTorch YOLOv3 推理和训练代码。该代码可在Linux，MacOS和Windows上运行。默认情况下，对COCO数据集进行训练：https://cocodataset.org/#home **感谢YOLO的Joseph Redmon：** https://pjreddie.com/darknet/yolo/ 
+该 https://github.com/ultralytics/yolov3 代码包含PyTorch YOLOv3 推理和训练代码。该代码可在Linux，MacOS和Windows上运行。默认情况下，对 mask_face 数据集进行训练
 
 # 要求
 
@@ -36,10 +36,11 @@ PPython 3.7或更高版本，pip install -U -r requirements.txt包括以下所�
 * [Train Single Class](https://github.com/ultralytics/yolov3/wiki/Example:-Train-Single-Class)
 * [Google Colab Notebook](https://colab.research.google.com/drive/1G8T-VFxQkjDe4idzN8F-hbIBqkkkQnxw) 具有快速培训，推断和测试示例
 * [GCP 快速入门](https://github.com/ultralytics/yolov3/wiki/GCP-Quickstart)
+* *data/mask_face.names* 俩种类型 Masking 带口罩，unMasked 未带口罩
 
 # 训练
 
-**开始训练:** `data/get_coco2017.sh` 请下载百度云网盘数据后开始训练 `python3.6 train.py`
+**开始训练:** 请自定义数据后开始训练，可以去抓取口罩相关图片 百度搜索戴口罩 `python3.6 train.py --data data/mask_face.data --weights weights/yolov3-tiny.weights --cfg cfg/yolov3-tiny.cfg --epochs 100`
 
 **恢复训练:** `python3 train.py --resume` 恢复训练 `weights/last.pt`.
 
